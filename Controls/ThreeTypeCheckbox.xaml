@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Controls.ThreeTypeCheckbox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Controls"
+             x:Name="uc"
+             mc:Ignorable="d" >
+             
+    <UserControl.Resources>
+        <local:EnumValueConverter x:Key="enumValueConverter"></local:EnumValueConverter>
+        <Style TargetType="{x:Type CheckBox}" x:Key="myCheckBoxStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <WrapPanel>
+                            <Image x:Name="checkBoxImage" Source="D:/sources/work/WpfControls/Controls/images/check_empty.png" Width="16"></Image>
+                        </WrapPanel>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=CheckboxStatus2, ElementName=uc}" Value="{x:Static local:CheckboxStatus.None}">
+                                <Setter TargetName="checkBoxImage" Property="Source" Value="D:/sources/work/WpfControls/Controls/images/check_empty.png"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CheckboxStatus2, ElementName=uc}" Value="{x:Static local:CheckboxStatus.Checked}">
+                                <Setter TargetName="checkBoxImage" Property="Source" Value="D:/sources/work/WpfControls/Controls/images/check_check.png"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CheckboxStatus2, ElementName=uc}" Value="{x:Static local:CheckboxStatus.Over}">
+                                <Setter TargetName="checkBoxImage" Property="Source" Value="D:/sources/work/WpfControls/Controls/images/check_over.png"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CheckboxStatus2, ElementName=uc}" Value="{x:Static local:CheckboxStatus.Half}">
+                                <Setter TargetName="checkBoxImage" Property="Source" Value="D:/sources/work/WpfControls/Controls/images/check_half.png"></Setter>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    <WrapPanel>
+        <CheckBox Style="{StaticResource myCheckBoxStyle}"
+                  MouseEnter="CheckBox_MouseEnter"
+                  MouseLeave="CheckBox_MouseLeave"
+                  Click="CheckBox_Click"
+                  x:Name="checkBox"
+                  Cursor="Hand"
+                  />
+        <TextBox x:Name="maskedTextBox1"/>
+
+    </WrapPanel>
+</UserControl>
